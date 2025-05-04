@@ -44,10 +44,31 @@ void getCircleInput(double &r) {
     std::cin>>r;
 };
 
+void getLength(double &l) {
+    std::cout<<"Enter length: "<<std::endl;
+    std::cin>>l;
+}
+
+void getWidth(double &w) {
+    std::cout<<"Enter width: "<<std::endl;
+    std::cin>>w;
+}
+
 void calculateCircle(double &r, double &area, double &circumference) {
     area = 3.14 * r * r;
     circumference = 2 * 3.14 * r;
 };
+
+void calculateSquare(double &l, double &area, double &perimeter) {
+    area = l * l;
+    perimeter = 4 * l;
+};
+
+void calculateRectangle(double &l, double &w, double &area, double &perimeter) {
+    area = l * w;
+    perimeter = 2 * (l + w);
+};
+
 
 void handleCircle() {
     double radius;
@@ -62,16 +83,31 @@ void handleCircle() {
 };
 
 
-// void handleSquare() {
-//     double length;
-//     getLengthInput(length);
+void handleSquare() {
+    double length;
+    getLength(length);
     
-//     double area, perimeter; 
-//     calculateSquare(length, area, perimeter);
+    double area, perimeter; 
+    calculateSquare(length, area, perimeter);
 
-//     cout << "Square handler not yet implemented.\n"; 
-// }
-void handleRectangle() { cout << "Rectangle handler not yet implemented.\n"; }
+    std::cout<<"\n"<<std::endl;
+    std::cout<<"Area: "<<area<<std::endl;
+    std::cout<<"Perimeter: "<<perimeter<<std::endl;
+}
+
+void handleRectangle() { 
+    double length, width;
+    getLength(length);
+    getWidth(width);
+
+    double area, perimeter;
+    calculateRectangle(length, width, area, perimeter);
+
+    std::cout<<"\n"<<std::endl;
+    std::cout<<"Area: "<<area<<std::endl;
+    std::cout<<"Perimeter: "<<perimeter<<std::endl;
+ }
+
 void handleTriangle() { cout << "Triangle handler not yet implemented.\n"; }
 void handlePentagon() { cout << "Pentagon handler not yet implemented.\n"; }
 void handleHexagon() { cout << "Hexagon handler not yet implemented.\n"; }
@@ -82,6 +118,11 @@ void handleDecagon() { cout << "Decagon handler not yet implemented.\n"; }
 void handlePolygon() { cout << "Polygon handler not yet implemented.\n"; }
 
 void dispatch_shape(ShapeType shape) {
+    if (shape < CIRCLE || shape > POLYGON) {
+        std::cout << "Invalid shape selected.\n";
+        return;
+    }
+
     switch(shape) {
         case CIRCLE: handleCircle(); break;
         case SQUARE: handleSquare(); break;
@@ -98,25 +139,30 @@ void dispatch_shape(ShapeType shape) {
 };
 
 int main() {
-    std::cout<<"Welcome to the Geometry Calculator!\n\n"<<std::endl;
+    std::cout<<"Welcome to the Geometry Calculator!\n"<<std::endl;
 
-    std::cout<<"Choose a shape:\n"<<std::endl;
-    print_menu();
+     while (true) {
+        std::cout<<"\n"<<std::endl;
+        std::cout << "Choose a shape:\n";
+        print_menu();
 
-    int selection;
+        int selection;
+        std::cout << "Enter Choice: ";
+        std::cin >> selection;
 
-    std::cout<<"Enter Choice: ";
-    std::cin>>selection;
+        if (selection == 0) {
+            std::cout << "Shutting down...\n";
+            break;  // Exits the loop and ends the program
+        }
 
-    ShapeType choice = static_cast<ShapeType>(selection);
+        ShapeType choice = static_cast<ShapeType>(selection);
 
-    if (selection == 0) {
-        std::cout << "Shutting down..." << std::endl;
-        return 0;
+        std::cout << "Your Choice: " << shapeNames[choice] << "\n\n";
+
+        dispatch_shape(choice);  // Process the selected shape
     }
 
-    std::cout<<"Your Choice: "<< shapeNames[choice]<<"\n\n"<<std::endl;
+    return 0;
 
-    dispatch_shape(choice);
 };
 
