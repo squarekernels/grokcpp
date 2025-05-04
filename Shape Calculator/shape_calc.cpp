@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <cmath> 
 
 using namespace std;
 
@@ -39,19 +40,9 @@ void print_menu() {
     std::cout << "0. Exit\n\n" << std::endl;
 };
 
-void getCircleInput(double &r) {
-    std::cout<<"Enter radius: "<<std::endl;
-    std::cin>>r;
-};
-
-void getLength(double &l) {
-    std::cout<<"Enter length: "<<std::endl;
-    std::cin>>l;
-}
-
-void getWidth(double &w) {
-    std::cout<<"Enter width: "<<std::endl;
-    std::cin>>w;
+void getInput(const std::string &prompt, double &value) {
+    std::cout<<prompt;
+    std::cin>>value;
 }
 
 void calculateCircle(double &r, double &area, double &circumference) {
@@ -69,10 +60,14 @@ void calculateRectangle(double &l, double &w, double &area, double &perimeter) {
     perimeter = 2 * (l + w);
 };
 
+void calculateTriangle(double &b, double &h, double &area, double &perimeter) {
+    area = 0.5 * b * h;
+    perimeter = b + 2 * sqrt(pow((b/2), 2) + pow(h, 2));
+};
 
 void handleCircle() {
     double radius;
-    getCircleInput(radius);
+    getInput("Enter length: ", radius);
 
     double area, circumference;
     calculateCircle(radius, area, circumference);
@@ -85,7 +80,7 @@ void handleCircle() {
 
 void handleSquare() {
     double length;
-    getLength(length);
+    getInput("Enter length: ", length);
     
     double area, perimeter; 
     calculateSquare(length, area, perimeter);
@@ -97,8 +92,8 @@ void handleSquare() {
 
 void handleRectangle() { 
     double length, width;
-    getLength(length);
-    getWidth(width);
+    getInput("Enter length: ", length);
+    getInput("Enter width: ", width);
 
     double area, perimeter;
     calculateRectangle(length, width, area, perimeter);
@@ -106,9 +101,22 @@ void handleRectangle() {
     std::cout<<"\n"<<std::endl;
     std::cout<<"Area: "<<area<<std::endl;
     std::cout<<"Perimeter: "<<perimeter<<std::endl;
- }
+}
 
-void handleTriangle() { cout << "Triangle handler not yet implemented.\n"; }
+void handleTriangle() { 
+    double base, height;
+    getInput("Enter base length: ", base);
+    getInput("Enter height: ", height);
+
+    double area, perimeter;
+    calculateTriangle(base, height, area, perimeter);
+
+    std::cout<<"\n"<<std::endl;
+    std::cout<<"Area: "<<area<<std::endl;
+    std::cout<<"Perimeter: "<<perimeter<<std::endl;
+}
+
+
 void handlePentagon() { cout << "Pentagon handler not yet implemented.\n"; }
 void handleHexagon() { cout << "Hexagon handler not yet implemented.\n"; }
 void handleHeptagon() { cout << "Heptagon handler not yet implemented.\n"; }
@@ -163,6 +171,5 @@ int main() {
     }
 
     return 0;
-
 };
 
