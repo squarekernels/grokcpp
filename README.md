@@ -83,11 +83,11 @@ This hub repository **only contains this README**. Each milestone project is hos
 
 ---
 
-## 🧠 Final Capstone
+<!-- ## 🧠 Final Capstone
 
 | Project | Description |
 |--------|-------------|
-| [`LittleAI`](https://github.com/your-org/little-ai) | 🚀 **LittleAI** – A minimal deep learning framework in Modern C++, designed as a capstone project integrating everything learned. |
+| [`LittleAI`](https://github.com/your-org/little-ai) | 🚀 **LittleAI** – A minimal deep learning framework in Modern C++, designed as a capstone project integrating everything learned. | -->
 
 ---
 
