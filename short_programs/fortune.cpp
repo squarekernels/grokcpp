@@ -14,7 +14,8 @@ void showMessage(const std::string &message) {
 }
 
 void printMessage(const std::string &name, const std::string &adjective, const std::string &noun, const std::string &ending) {
-    std::cout<<name<<", "<<adjective<<" "<<noun<<" that "<<ending<<std::endl;
+    using std::string_literals::operator""s;
+    std::cout<<name + ", "s + adjective + " "s + noun + " that "s + ending<<std::endl;
 }
 
 std::string getInfo(const std::string &season) {
